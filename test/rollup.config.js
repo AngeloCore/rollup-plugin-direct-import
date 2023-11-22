@@ -5,5 +5,16 @@ export default {
   output: {
     dir: "output"
   },
-  plugins: [plugin()]
+  plugins: [
+    plugin({
+      stuff: {
+        value: "lego",
+        type: "text"
+      },
+      data: {
+        value: "export default { fun: true };",
+        type: "code"
+      }
+    })
+  ]
 };

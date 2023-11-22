@@ -1,15 +1,34 @@
 import { Plugin } from "rollup";
 
 interface Options {
-  cool: boolean;
+  [key: string]: {
+    value: any;
+    type: "code" | "text";
+  };
 }
 
-export function doIt(thing: string) {
-  return thing;
-}
-
-export default function plugin(options: Options = { cool: true }): Plugin {
+export default function plugin(options: Options = {}): Plugin {
   return {
-    name: "template"
+    name: "direct-import",
+    resolveId(source) {
+      return options[source] ? source : null;
+    },
+    async load(source) {
+      const val = options[source];
+      if (val) {
+        if (typeof val.value != "string") val.value = JSON.stringify(val.value);
+
+        switch (val.type) {
+          case "code":
+            return val.value;
+          case "text":
+            return `export default ${JSON.stringify(val.value)};`;
+          default:
+            null;
+        }
+      }
+
+      return null;
+    }
   };
 }

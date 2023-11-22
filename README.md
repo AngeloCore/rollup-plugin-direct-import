@@ -1,31 +1,31 @@
-# rollup-plugin-template
+# rollup-plugin-direct-import
 
-The template for my rollup plugins.
+Rollup plugin to import code from config at built time.
 
 ## Installation
 
 npm:
 
 ```console
-npm i rollup-plugin-template -D
+npm i rollup-plugin-direct-import -D
 ```
 
 yarn:
 
 ```console
-yarn add rollup-plugin-template -D
+yarn add rollup-plugin-direct-import -D
 ```
 
 pnpm:
 
 ```console
-pnpm add rollup-plugin-template -D
+pnpm add rollup-plugin-direct-import -D
 ```
 
 ## Usage
 
 ```js
-import template from "rollup-plugin-template";
+import directImport from "rollup-plugin-direct-import";
 
 export default {
   input: "src/index.js",
@@ -33,32 +33,53 @@ export default {
     dir: "output",
     format: "cjs"
   },
-  plugins: [template()]
+  plugins: [
+    directImport({
+      stuff: {
+        value: "lego",
+        type: "text"
+      },
+      data: {
+        value: "export default { fun: true };",
+        type: "code"
+      }
+    })
+  ]
 };
+```
+
+src/index.js
+
+```js
+import stuff from "stuff";
+import data from "data";
+
+console.log("I was doing", stuff);
+console.log(data);
+```
+
+output/index.js
+
+```js
+var stuff = "lego";
+
+var data = { fun: true };
+
+console.log("I was doing", stuff);
+console.log(data);
 ```
 
 ## Options
 
-### `cool`
+### `[import]`
 
-Type: `boolean` <br>
-Default: `true`
-
-Determines if the plugin is cool
-
-## Exports
-
-### `doIt(thing: string)`
-
-Returns: `string`
-
-It does the specific thing.
+Type: `{ value: any; type: "code" | "text"; }`
 
 ## Information
 
 ### Resources
 
-- [Github](https://github.com/AngeloCore/rollup-plugin-template)
+- [Github](https://github.com/AngeloCore/rollup-plugin-direct-import)
 - [Rollup](https://rollupjs.org/)
 
 Made by [Angelo II](https://github.com/AngeloCore)

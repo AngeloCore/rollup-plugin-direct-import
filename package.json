@@ -1,17 +1,17 @@
 {
-  "name": "rollup-plugin-template",
+  "name": "rollup-plugin-direct-import",
   "version": "1.0.0",
-  "description": "The template for my rollup plugins.",
+  "description": "Rollup plugin to import code from config at built time.",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
   "type": "module",
   "keywords": [],
   "author": "Angelo II",
   "license": "MIT",
-  "homepage": "https://github.com/AngeloCore/rollup-plugin-template",
+  "homepage": "https://github.com/AngeloCore/rollup-plugin-direct-import",
   "funding": "https://paypal.me/AngeloCore",
   "repository": {
-    "url": "AngeloCore/rollup-plugin-template"
+    "url": "AngeloCore/rollup-plugin-direct-import"
   },
   "scripts": {
     "prepublishOnly": "npm run clean && npm run format && npm run build",
